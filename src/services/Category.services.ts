@@ -2,7 +2,7 @@ import moment from "moment";
 import { Category } from "../models/Association";
 import { ICategory } from "../types/general";
 
-export const postCategory = async (body: ICategory) => {
+const postCategory = async (body: ICategory) => {
   const exist_category = await Category.findOne({
     where: { name: body.name },
   });
@@ -16,5 +16,9 @@ export const postCategory = async (body: ICategory) => {
   });
 
   if (!category) throw new Error("Hubo un error al registrar la categoria!!!");
+  return category;
 };
 
+export default {
+  postCategory,
+};
