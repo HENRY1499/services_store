@@ -1,20 +1,17 @@
 import { DataTypes } from "sequelize";
 import { db_project } from "../configuration/database";
 
-export const Category = db_project.define(
-  "categories",
+export const Sales = db_project.define(
+  "sales",
   {
-    category_id: {
+    id_sales: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    image: {
-      type: DataTypes.STRING,
-    },
-    status: {
-      type: DataTypes.CHAR,
-      defaultValue: 1,
+    total: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
     },
   },
   {

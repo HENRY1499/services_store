@@ -1,0 +1,20 @@
+import moment from "moment";
+import { Category } from "../models/Association";
+import { ICategory } from "../types/general";
+
+export const postCategory = async (body: ICategory) => {
+  const exist_category = await Category.findOne({
+    where: { name: body.name },
+  });
+  if (exist_category) {
+    throw new Error("La categoria ya existe!!!");
+  }
+  const category = await Category.create({
+    name: body.name,
+    image: body.image,
+    createdAt: moment(),
+  });
+
+  if (!category) throw new Error("Hubo un error al registrar la categoria!!!");
+};
+
