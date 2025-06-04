@@ -27,12 +27,12 @@ export const Product = db_project.define(
     },
     stock: { type: DataTypes.INTEGER, defaultValue: 0 },
     status: { type: DataTypes.CHAR, defaultValue: 1 },
-    id_categories: {
+    id_category: {
       type: DataTypes.INTEGER,
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
     freezeTableName: true,
   }
 );

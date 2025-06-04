@@ -3,8 +3,8 @@ import { Product } from "./Product";
 import { Sales } from "./Sales";
 import { Details_sales } from "./Details_sales";
 // PRODUCT-CATEGORY
-Category.hasMany(Product, { foreignKey: "id_categories" });
-Product.belongsTo(Category, { foreignKey: "id_categories" });
+Category.hasMany(Product, { foreignKey: "id_category" });
+Product.belongsTo(Category, { foreignKey: "id_category" });
 
 // PRODUCT - SALES
 Product.belongsToMany(Sales, {

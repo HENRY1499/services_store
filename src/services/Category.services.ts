@@ -16,7 +16,7 @@ const postCategory = async (body: ICategory) => {
   });
 
   if (!category) throw new Error("Hubo un error al registrar la categoria!!!");
-  return category;
+  // return category;
 };
 
 export default {
