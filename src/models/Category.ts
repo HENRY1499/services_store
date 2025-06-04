@@ -4,10 +4,13 @@ import { db_project } from "../configuration/database";
 export const Category = db_project.define(
   "categories",
   {
-    category_id: {
+    id_categories: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
     },
     image: {
       type: DataTypes.STRING,
@@ -18,7 +21,7 @@ export const Category = db_project.define(
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
     freezeTableName: true,
   }
 );

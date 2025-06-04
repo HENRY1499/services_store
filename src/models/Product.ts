@@ -27,7 +27,7 @@ export const Product = db_project.define(
     },
     stock: { type: DataTypes.INTEGER, defaultValue: 0 },
     status: { type: DataTypes.CHAR, defaultValue: 1 },
-    id_category: {
+    id_categories: {
       type: DataTypes.INTEGER,
     },
   },

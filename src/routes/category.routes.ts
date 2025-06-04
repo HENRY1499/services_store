@@ -3,6 +3,6 @@ import CategoryController from "../controllers/category.controller";
 
 const router = Router();
 
-router.post("/", CategoryController.createCategory);
+router.post("/save", CategoryController.createCategory);
 
 export default router;
