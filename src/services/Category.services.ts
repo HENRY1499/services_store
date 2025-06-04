@@ -2,6 +2,12 @@ import moment from "moment";
 import { Category } from "../models/Association";
 import { ICategory } from "../types/general";
 
+const getCategory = async () => {
+  return await Category.findAll({
+    attributes: [["id_categories", "idc"], "name", "createdat"],
+  });
+};
+
 const postCategory = async (body: ICategory) => {
   const exist_category = await Category.findOne({
     where: { name: body.name },
@@ -21,4 +27,5 @@ const postCategory = async (body: ICategory) => {
 
 export default {
   postCategory,
+  getCategory,
 };
