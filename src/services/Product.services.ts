@@ -1,6 +1,14 @@
 import moment from "moment";
 import { Product } from "../models/Product";
 import { IProduct } from "../types/general";
+import { Category } from "../models/Category";
+
+const getProduct = async () => {
+  return await Product.findAll({
+    attributes: { exclude: ["id_category", "updatedat"] },
+    include: { attributes: ["name"], model: Category },
+  });
+};
 
 const postProduct = async (body: IProduct) => {
   const exist_product = await Product.findOne({
@@ -19,11 +27,12 @@ const postProduct = async (body: IProduct) => {
     status: body.status,
     createdAt: moment(),
   });
-  
+
   if (!newData)
     throw new Error("Ocurrio un error al momento de crear el producto !!!");
 };
 
 export default {
   postProduct,
+  getProduct,
 };
