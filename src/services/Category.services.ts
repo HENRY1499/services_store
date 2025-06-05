@@ -18,7 +18,7 @@ const postCategory = async (body: ICategory) => {
   const category = await Category.create({
     name: body.name,
     image: body.image,
-    createdAt: moment(),
+    createdat: moment(),
   });
 
   if (!category) throw new Error("Hubo un error al registrar la categoria!!!");

@@ -3,8 +3,8 @@ export interface ICategory {
   name: string;
   image: string;
   status: number;
-  createdAt: string;
-  updatedAt: string;
+  createdat: string;
+  updatedat: string;
 }
 export interface IProduct {
   id_product: number;
@@ -15,8 +15,8 @@ export interface IProduct {
   stock: number;
   id_category: number;
   status: number;
-  createdAt: string;
-  updatedAt: string;
+  createdat: Date;
+  updatedat: Date;
 }
 
 export interface ISales {

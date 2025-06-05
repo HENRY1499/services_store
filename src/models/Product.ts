@@ -19,6 +19,8 @@ export class ProductModel extends Model<
   declare stock: number;
   declare id_category: number;
   declare status: number;
+  declare createdat: CreationOptional<Date>; // si no usas timestamps puedes omitir estos
+  declare updatedat: CreationOptional<Date>;
 }
 ProductModel.init(
   {
@@ -54,6 +56,10 @@ ProductModel.init(
     id_category: {
       type: DataTypes.INTEGER,
     },
+    createdat: {
+      type: DataTypes.DATE,
+    },
+    updatedat: { type: DataTypes.DATE },
   },
   {
     sequelize: db_project,

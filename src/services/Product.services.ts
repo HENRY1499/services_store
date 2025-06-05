@@ -1,23 +1,23 @@
 import moment from "moment";
-import { Product } from "../models/Product";
+import { ProductModel } from "../models/Product";
 import { IProduct } from "../types/general";
-import { Category } from "../models/Category";
+import { CategoryModel } from "../models/Category";
 
 const getProduct = async () => {
-  return await Product.findAll({
+  return await ProductModel.findAll({
     attributes: { exclude: ["id_category", "updatedat"] },
-    include: { attributes: ["name"], model: Category },
+    include: { attributes: ["name"], model: CategoryModel },
   });
 };
 
 const postProduct = async (body: IProduct) => {
-  const exist_product = await Product.findOne({
+  const exist_product = await ProductModel.findOne({
     where: { name: body.name },
   });
   if (exist_product) {
     throw new Error("El producto ya existe");
   }
-  const newData = await Product.create({
+  const newData = await ProductModel.create({
     name: body.name,
     description: body.description,
     id_category: body.id_category,
@@ -25,7 +25,7 @@ const postProduct = async (body: IProduct) => {
     purchase_price: body.purchase_price,
     stock: body.stock,
     status: body.status,
-    createdAt: moment(),
+    createdat: moment().toDate(),
   });
 
   if (!newData)
