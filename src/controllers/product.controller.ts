@@ -6,8 +6,7 @@ const getProduct = async (_req: Request, res: Response) => {
     const product = await ProductServices.getProduct();
     return res.status(200).json(product);
   } catch (error: any) {
-    console.log("error", error);
-    // return res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 const createProduct = async (req: Request, res: Response) => {
