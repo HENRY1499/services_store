@@ -1,8 +1,26 @@
-import { DataTypes } from "sequelize";
+import {
+  DataTypes,
+  Model,
+  InferAttributes,
+  InferCreationAttributes,
+  CreationOptional,
+} from "sequelize";
 import { db_project } from "../configuration/database";
 
-export const Product = db_project.define(
-  "products",
+export class ProductModel extends Model<
+  InferAttributes<ProductModel>,
+  InferCreationAttributes<ProductModel>
+> {
+  declare id_product: CreationOptional<number>;
+  declare name: string;
+  declare description: string;
+  declare sales_price: string;
+  declare purchase_price: string;
+  declare stock: number;
+  declare id_category: number;
+  declare status: number;
+}
+ProductModel.init(
   {
     id_product: {
       type: DataTypes.INTEGER,
@@ -25,14 +43,23 @@ export const Product = db_project.define(
       type: DataTypes.DECIMAL,
       allowNull: false,
     },
-    stock: { type: DataTypes.INTEGER, defaultValue: 0 },
-    status: { type: DataTypes.CHAR, defaultValue: 1 },
+    stock: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    status: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
+    },
     id_category: {
       type: DataTypes.INTEGER,
     },
   },
   {
-    timestamps: false,
+    sequelize: db_project,
+    modelName: "products",
+    tableName: "products",
     freezeTableName: true,
+    timestamps: false,
   }
 );

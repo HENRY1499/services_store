@@ -13,8 +13,25 @@ export interface IProduct {
   sales_price: string;
   purchase_price: string;
   stock: number;
-  id_category: ICategory;
+  id_category: number;
   status: number;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface ISales {
+  id_sales: number;
+  total: string;
+  status: number;
+  createdat: string;
+  updatedat: string;
+}
+
+export interface IDetails_sales {
+  id_detail: number;
+  id_product: IProduct;
+  id_sale: ISales;
+  sales_price: number;
+  quantity: string;
+  subtotal: string;
 }
