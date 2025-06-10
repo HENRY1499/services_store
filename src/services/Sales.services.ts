@@ -1,10 +1,18 @@
 import { ProductModel } from "../models/Product";
-import { Sales } from "../models/Sales";
-import { IProduct } from "../types/general";
+import {
+  IDetailSales,
+  IProduct,
+  ISaleCreationResult,
+  ISaleDetailInput,
+} from "../types/general";
+import { DetailSaleModel, SalesModel } from "../models/Association";
+import moment from "moment";
+import { db_project } from "../configuration/database";
+import { Transaction } from "sequelize";
 
 const getSales = async () => {
-  return await Sales.findAll({
-    attributes: [["id_sales", "sid"], "total", "createdat"],
+  return await SalesModel.findAll({
+    attributes: [["id_sale", "sid"], "total", "createdat"],
   });
 };
 
@@ -13,7 +21,6 @@ const verifyStock = async (body: IProduct[]) => {
     const product = await ProductModel.findOne({
       where: { id_product: item.id_product },
     });
-    console.log("product:", product);
     if (!product) {
       throw new Error(`Producto con ID ${item.id_product} no encontrado`);
     }
@@ -24,7 +31,65 @@ const verifyStock = async (body: IProduct[]) => {
   return true;
 };
 
+const createSales = async (
+  details: ISaleDetailInput[]
+): Promise<ISaleCreationResult> => {
+  // sumamos el total
+  const total = details.reduce(
+    (acc, item) => acc + item.sales_price * item.quantity,
+    0
+  );
+  const t: Transaction = await db_project.transaction();
+  try {
+    const sale = await SalesModel.create(
+      {
+        total: total.toFixed(2),
+        createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
+      },
+      { transaction: t }
+    );
+
+    const detailSales: IDetailSales[] = [];
+    for (const item of details) {
+      const subtotal = (item.sales_price * item.quantity).toFixed(2);
+
+      // agregamos el detalle a la tabla details_sales
+      const created = await DetailSaleModel.create(
+        {
+          id_sale: sale.id_sale,
+          id_product: item.id_product,
+          sales_price: item.sales_price.toString(),
+          quantity: item.quantity,
+          subtotal,
+        },
+        { transaction: t }
+      );
+      const detail = created.get({ plain: true });
+
+      detailSales.push({
+        id_detail: detail.id_detail,
+        id_product: item.id_product,
+        quantity: item.quantity.toString(),
+        sales_price: item.sales_price,
+        id_sale: sale.id_sale,
+        subtotal,
+      });
+
+      await ProductModel.update(
+        { stock: db_project.literal(`stock - ${created.quantity}`) },
+        { where: { id_product: created.id_product } }
+      );
+    }
+    await t.commit();
+    return { sale, detailSales };
+  } catch (error) {
+    await t.rollback();
+    throw error;
+  }
+};
+
 export default {
   getSales,
   verifyStock,
+  createSales,
 };

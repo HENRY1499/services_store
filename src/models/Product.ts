@@ -65,7 +65,7 @@ ProductModel.init(
     sequelize: db_project,
     modelName: "products",
     tableName: "products",
-    freezeTableName: true,
     timestamps: false,
+    freezeTableName: true,
   }
 );
