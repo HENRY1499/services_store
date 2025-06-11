@@ -75,6 +75,17 @@ const createSales = async (
         subtotal,
       });
 
+      const product = await ProductModel.findOne({
+        where: { id_product: created.id_product },
+      });
+
+      if (!product) {
+        throw new Error(`Producto con ID ${item.id_product} no encontrado`);
+      }
+      if (product?.stock < created.quantity) {
+        throw new Error("No hay estoy suficiente para realizar la venta!!!");
+      }
+
       await ProductModel.update(
         { stock: db_project.literal(`stock - ${created.quantity}`) },
         { where: { id_product: created.id_product } }
