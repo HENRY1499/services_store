@@ -20,18 +20,30 @@ export interface IProduct {
 }
 
 export interface ISales {
-  id_sales: number;
+  id_sale: number;
   total: string;
   status: number;
   createdat: string;
   updatedat: string;
 }
 
-export interface IDetails_sales {
+// interface para los datos que se reciben desde el cliente
+export interface ISaleDetailInput {
+  id_product: number;
+  sales_price: number;
+  quantity: number;
+}
+
+export interface IDetailSales {
   id_detail: number;
-  id_product: IProduct;
-  id_sale: ISales;
+  id_product: number;
   sales_price: number;
   quantity: string;
+  id_sale: number;
   subtotal: string;
+}
+
+export interface ISaleCreationResult {
+  sale: any; // o una interfaz específica si la tenés
+  detailSales: IDetailSales[];
 }
