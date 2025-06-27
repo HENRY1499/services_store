@@ -3,8 +3,8 @@ export interface ICategory {
   name: string;
   image: string;
   status: number;
-  createdat: string;
-  updatedat: string;
+  createdat: Date;
+  updatedat: Date;
 }
 export interface IProduct {
   id_product: number;

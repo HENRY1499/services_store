@@ -15,6 +15,8 @@ export class CategoryModel extends Model<
   declare name: string;
   declare image: string;
   declare status: number;
+  declare createdat: CreationOptional<Date>; // si no usas timestamps puedes omitir estos
+  declare updatedat: CreationOptional<Date>;
 }
 
 CategoryModel.init(
@@ -34,6 +36,10 @@ CategoryModel.init(
       type: DataTypes.INTEGER,
       defaultValue: 1,
     },
+    createdat: {
+      type: DataTypes.DATE,
+    },
+    updatedat: { type: DataTypes.DATE },
   },
   {
     sequelize: db_project,

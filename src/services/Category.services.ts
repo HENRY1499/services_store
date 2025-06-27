@@ -1,24 +1,25 @@
 import moment from "moment";
-import { Category } from "../models/Association";
+import { CategoryModel } from "../models/Association";
 import { ICategory } from "../types/general";
 
 const getCategory = async () => {
-  return await Category.findAll({
+  return await CategoryModel.findAll({
     attributes: [["id_categories", "idc"], "name", "createdat"],
   });
 };
 
 const postCategory = async (body: ICategory) => {
-  const exist_category = await Category.findOne({
+  const exist_category = await CategoryModel.findOne({
     where: { name: body.name },
   });
   if (exist_category) {
     throw new Error("La categoria ya existe!!!");
   }
-  const category = await Category.create({
+  const category = await CategoryModel.create({
     name: body.name,
     image: body.image,
-    createdat: moment(),
+    status: body.status,
+    createdat: moment().toDate(),
   });
 
   if (!category) throw new Error("Hubo un error al registrar la categoria!!!");
