@@ -10,9 +10,9 @@ export interface IProduct {
   id_product: number;
   name: string;
   description: string;
-  sales_price: string;
-  purchase_price: string;
-  stock: number;
+  sales_price: number;
+  purchase_price: number;
+  stock: string;
   id_category: number;
   status: number;
   createdat: Date;
