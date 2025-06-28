@@ -16,7 +16,7 @@ export class ProductModel extends Model<
   declare description: string;
   declare sales_price: number;
   declare purchase_price: number;
-  declare stock: string;
+  declare stock: number;
   declare id_category: number;
   declare status: number;
   declare createdat: CreationOptional<Date>; // si no usas timestamps puedes omitir estos

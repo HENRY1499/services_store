@@ -12,7 +12,7 @@ export interface IProduct {
   description: string;
   sales_price: number;
   purchase_price: number;
-  stock: string;
+  stock: number;
   id_category: number;
   status: number;
   createdat: Date;
