@@ -12,12 +12,12 @@ export class DetailSaleModel extends Model<
   InferCreationAttributes<DetailSaleModel>
 > {
   declare id_detail: CreationOptional<number>;
-  declare quantity: number;
-  declare sales_price: string;
-  declare subtotal: string;
-  declare pay_method: string;
-  declare id_product: number;
   declare id_sale: number;
+  declare subtotal: number;
+  declare quantity: number;
+  declare id_product: number;
+  declare sales_price: number;
+  declare pay_method: string;
   declare createdat: string; // si no usas timestamps puedes omitir estos
   declare updatedat?: string;
 }
@@ -35,11 +35,12 @@ DetailSaleModel.init(
       defaultValue: 0,
     },
     sales_price: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL(12, 2),
       defaultValue: 0.0,
     },
     subtotal: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(12, 2),
+      defaultValue: 0.0,
     },
     id_product: {
       type: DataTypes.INTEGER,
@@ -53,7 +54,6 @@ DetailSaleModel.init(
     createdat: {
       type: DataTypes.STRING,
     },
-    updatedat: { type: DataTypes.STRING },
   },
   {
     sequelize: db_project,

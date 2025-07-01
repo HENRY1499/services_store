@@ -12,7 +12,8 @@ export class SalesModel extends Model<
   InferCreationAttributes<SalesModel>
 > {
   declare id_sale: CreationOptional<number>;
-  declare total: string;
+  declare total: number;
+  declare status: number;
   declare createdat: string;
   declare updatedat?: string;
 }
@@ -25,13 +26,13 @@ SalesModel.init(
       autoIncrement: true,
     },
     total: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
-    createdat: {
-      type: DataTypes.STRING,
+    status: {
+      type: DataTypes.NUMBER,
     },
-    updatedat: {
+    createdat: {
       type: DataTypes.STRING,
     },
   },

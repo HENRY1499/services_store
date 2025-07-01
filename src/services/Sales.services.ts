@@ -39,26 +39,31 @@ const createSales = async (
     (acc, item) => acc + item.sales_price * item.quantity,
     0
   );
+
   const t: Transaction = await db_project.transaction();
+
   try {
     const sale = await SalesModel.create(
       {
-        total: total.toFixed(2),
+        total: parseFloat(total.toFixed(2)),
+        status: 1,
         createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
       },
       { transaction: t }
     );
 
     const detailSales: IDetailSales[] = [];
-    for (const item of details) {
-      const subtotal = (item.sales_price * item.quantity).toFixed(2);
 
+    for (const item of details) {
+      const subtotal = parseFloat(
+        (item.sales_price * item.quantity).toFixed(2)
+      );
       // agregamos el detalle a la tabla details_sales
       const created = await DetailSaleModel.create(
         {
           id_sale: sale.id_sale,
           id_product: item.id_product,
-          sales_price: item.sales_price.toString(),
+          sales_price: item.sales_price,
           quantity: item.quantity,
           pay_method: item.pay_method,
           subtotal,
@@ -70,12 +75,13 @@ const createSales = async (
 
       detailSales.push({
         id_detail: detail.id_detail,
-        id_product: item.id_product,
-        quantity: item.quantity.toString(),
-        sales_price: item.sales_price,
+        id_product: created.id_product,
+        quantity: created.quantity,
+        sales_price: created.sales_price,
         id_sale: sale.id_sale,
         subtotal,
-        createdat: item.createdat,
+        pay_method: detail.pay_method,
+        createdat: created.createdat,
       });
 
       const product = await ProductModel.findOne({
