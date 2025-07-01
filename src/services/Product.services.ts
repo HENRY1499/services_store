@@ -32,7 +32,33 @@ const postProduct = async (body: IProduct) => {
     throw new Error("Ocurrio un error al momento de crear el producto !!!");
 };
 
+const updatedProduct = async (body: IProduct) => {
+  const product = await ProductModel.findOne({
+    where: { id_product: body.id_product },
+  });
+  if (!product) {
+    throw new Error("Error al encontrar producto");
+  }
+  const updatedProduct = await ProductModel.update(
+    {
+      name: body.name,
+      description: body.description,
+      id_category: body.id_category,
+      sales_price: body.sales_price,
+      purchase_price: body.purchase_price,
+      stock: body.stock,
+      status: body.status,
+      updatedat: moment().toDate(),
+    },
+    { where: { id_product: body.id_product } }
+  );
+  if (!updatedProduct) {
+    throw new Error("No se pudo actualizar el producto");
+  }
+};
+
 export default {
   postProduct,
   getProduct,
+  updatedProduct,
 };

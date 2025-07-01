@@ -25,8 +25,28 @@ const postCategory = async (body: ICategory) => {
   if (!category) throw new Error("Hubo un error al registrar la categoria!!!");
   // return category;
 };
-
+const updatedCategory = async (body: ICategory) => {
+  const category = await CategoryModel.findOne({
+    attributes: ["name"],
+    where: {
+      id_categories: body.id_categories,
+    },
+  });
+  if (!category) {
+    throw new Error("No se encontro la categoria");
+  }
+  const updatedCategory = await CategoryModel.update(
+    {
+      name: body.name,
+    },
+    { where: { id_categories: body.id_categories } }
+  );
+  if (!updatedCategory) {
+    throw new Error("Ocurrio un error al actualizar Categoria.");
+  }
+};
 export default {
   postCategory,
   getCategory,
+  updatedCategory,
 };

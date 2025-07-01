@@ -20,7 +20,19 @@ const createCategory = async (req: Request, res: Response) => {
     return res.status(500).json({ message: error.message });
   }
 };
+const updatedCategory = async (req: Request, res: Response) => {
+  if (!req.body.id_categories) {
+    throw new Error("No se encontro la category");
+  }
+  try {
+    const categoryUpdated = await CategoryServices.updatedCategory(req.body);
+    return res.status(201).json(categoryUpdated);
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 export default {
   getCategory,
   createCategory,
+  updatedCategory,
 };
