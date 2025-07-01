@@ -28,7 +28,17 @@ const createSales = async (req: Request, res: Response) => {
   }
 };
 
+const getDestails = async (_req: Request, res: Response) => {
+  try {
+    const details = await SalesServices.getDestails();
+    return res.status(200).json(details);
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 export default {
   verifyStock,
   createSales,
+  getDestails,
 };

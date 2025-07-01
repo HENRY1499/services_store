@@ -5,10 +5,14 @@ import {
   ISaleCreationResult,
   ISaleDetailInput,
 } from "../types/general";
-import { DetailSaleModel, SalesModel } from "../models/Association";
+import {
+  CategoryModel,
+  DetailSaleModel,
+  SalesModel,
+} from "../models/Association";
 import moment from "moment";
 import { db_project } from "../configuration/database";
-import { Transaction } from "sequelize";
+import { Transaction, where } from "sequelize";
 
 const getSales = async () => {
   return await SalesModel.findAll({
@@ -29,6 +33,30 @@ const verifyStock = async (body: IProduct[]) => {
     }
   }
   return true;
+};
+
+const getDestails = async () => {
+  const salesDetails = await DetailSaleModel.findAll({
+    attributes: [
+      ["id_detail", "deid"],
+      "quantity",
+      "subtotal",
+      "sales_price",
+      "pay_method",
+      "createdat",
+    ],
+    include: {
+      attributes: ["name"],
+      model: ProductModel,
+      include: [
+        {
+          attributes: ["name"],
+          model: CategoryModel,
+        },
+      ],
+    },
+  });
+  return salesDetails;
 };
 
 const createSales = async (
@@ -112,4 +140,5 @@ export default {
   getSales,
   verifyStock,
   createSales,
+  getDestails,
 };

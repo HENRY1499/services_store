@@ -4,5 +4,6 @@ const router = Router();
 
 router.post("/verify/stock", salesController.verifyStock);
 router.post("/createDetail", salesController.createSales);
+router.get("/details", salesController.getDestails);
 
 export default router;
