@@ -32,6 +32,8 @@ export interface ISaleDetailInput {
   id_product: number;
   sales_price: number;
   quantity: number;
+  pay_method: string;
+  createdat: string;
 }
 
 export interface IDetailSales {
@@ -41,6 +43,7 @@ export interface IDetailSales {
   quantity: string;
   id_sale: number;
   subtotal: string;
+  createdat: string;
 }
 
 export interface ISaleCreationResult {

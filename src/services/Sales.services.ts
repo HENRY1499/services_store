@@ -60,7 +60,9 @@ const createSales = async (
           id_product: item.id_product,
           sales_price: item.sales_price.toString(),
           quantity: item.quantity,
+          pay_method: item.pay_method,
           subtotal,
+          createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
         },
         { transaction: t }
       );
@@ -73,6 +75,7 @@ const createSales = async (
         sales_price: item.sales_price,
         id_sale: sale.id_sale,
         subtotal,
+        createdat: item.createdat,
       });
 
       const product = await ProductModel.findOne({
