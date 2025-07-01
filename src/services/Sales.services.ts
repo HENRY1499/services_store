@@ -12,7 +12,7 @@ import {
 } from "../models/Association";
 import moment from "moment";
 import { db_project } from "../configuration/database";
-import { Transaction, where } from "sequelize";
+import { Transaction } from "sequelize";
 
 const getSales = async () => {
   return await SalesModel.findAll({
