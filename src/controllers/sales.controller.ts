@@ -15,7 +15,7 @@ const createSales = async (req: Request, res: Response) => {
   try {
     const { sale, detailSales } = await SalesServices.createSales(details);
 
-    return res.status(201).json({
+    return res.status(200).json({
       message: "Venta registrada correctamente",
       sale,
       details: detailSales,
