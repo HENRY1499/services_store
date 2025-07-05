@@ -5,7 +5,7 @@ import { CategoryModel } from "../models/Category";
 
 const getProduct = async () => {
   return await ProductModel.findAll({
-    attributes: { exclude: ["id_category", "updatedat"] },
+    attributes: {  exclude: ["id_category", "updatedat"] },
     include: { attributes: ["name"], model: CategoryModel },
   });
 };

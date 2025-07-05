@@ -46,7 +46,7 @@ const getDestails = async () => {
       "createdat",
     ],
     include: {
-      attributes: ["name"],
+      attributes: ["name", "stock"],
       model: ProductModel,
       include: [
         {
@@ -55,6 +55,7 @@ const getDestails = async () => {
         },
       ],
     },
+    order: [["createdat", "DESC"]],
   });
   return salesDetails;
 };
