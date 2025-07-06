@@ -30,7 +30,7 @@ SalesModel.init(
       allowNull: false,
     },
     status: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
     },
     createdat: {
       type: DataTypes.STRING,

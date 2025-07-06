@@ -13,6 +13,7 @@ app.use(cors());
 app.use(morgan("common"));
 app.use(express.json());
 // routes
+
 app.use("/api", routes);
 
 // conectar base de datos
