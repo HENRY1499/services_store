@@ -42,6 +42,7 @@ ProductModel.init(
       allowNull: false,
     },
     purchase_price: {
+      
       type: DataTypes.DECIMAL,
       allowNull: false,
     },
