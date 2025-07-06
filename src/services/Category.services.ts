@@ -19,7 +19,7 @@ const postCategory = async (body: ICategory) => {
     name: body.name,
     image: body.image,
     status: body.status,
-    createdat: moment().toDate(),
+    createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
   });
 
   if (!category) throw new Error("Hubo un error al registrar la categoria!!!");

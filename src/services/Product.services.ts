@@ -5,7 +5,7 @@ import { CategoryModel } from "../models/Category";
 
 const getProduct = async () => {
   return await ProductModel.findAll({
-    attributes: {  exclude: ["id_category", "updatedat"] },
+    attributes: { exclude: ["id_category", "updatedat"] },
     include: { attributes: ["name"], model: CategoryModel },
   });
 };
@@ -25,7 +25,7 @@ const postProduct = async (body: IProduct) => {
     purchase_price: body.purchase_price,
     stock: body.stock,
     status: body.status,
-    createdat: moment().toDate(),
+    createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
   });
 
   if (!newData)
@@ -48,7 +48,7 @@ const updatedProduct = async (body: IProduct) => {
       purchase_price: body.purchase_price,
       stock: body.stock,
       status: body.status,
-      updatedat: moment().toDate(),
+      updatedat: moment().format("YYYY-MM-DD HH:mm:ss"),
     },
     { where: { id_product: body.id_product } }
   );

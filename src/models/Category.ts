@@ -15,8 +15,8 @@ export class CategoryModel extends Model<
   declare name: string;
   declare image: string;
   declare status: number;
-  declare createdat: CreationOptional<Date>; // si no usas timestamps puedes omitir estos
-  declare updatedat: CreationOptional<Date>;
+  declare createdat: string; // si no usas timestamps puedes omitir estos
+  declare updatedat?: string;
 }
 
 CategoryModel.init(
