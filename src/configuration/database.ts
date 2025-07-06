@@ -19,6 +19,7 @@ export const db_project = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
     idle: 10000,
   },
 });
+
 export const conecction_DB = async () => {
   try {
     await db_project.authenticate();
