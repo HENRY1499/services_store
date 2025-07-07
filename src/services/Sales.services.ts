@@ -12,11 +12,19 @@ import {
 } from "../models/Association";
 import moment from "moment";
 import { db_project } from "../configuration/database";
-import { Transaction } from "sequelize";
+import { Op, Transaction } from "sequelize";
 
 const getSales = async () => {
+  const today = moment().startOf("day");
+  const tomorrow = moment(today).add(1, "day");
   return await SalesModel.findAll({
     attributes: [["id_sale", "sid"], "total", "createdat"],
+    where: {
+      createdat: {
+        [Op.between]: [today.toDate(), tomorrow.toDate()],
+      },
+    },
+    order: [["createdat", "DESC"]],
   });
 };
 

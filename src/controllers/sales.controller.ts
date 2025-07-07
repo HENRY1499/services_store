@@ -36,9 +36,18 @@ const getDestails = async (_req: Request, res: Response) => {
     return res.status(500).json({ message: error.message });
   }
 };
+const getSales = async (_req: Request, res: Response) => {
+  try {
+    const sales = await SalesServices.getSales();
+    return res.status(200).json(sales);
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 export default {
   verifyStock,
   createSales,
   getDestails,
+  getSales,
 };
