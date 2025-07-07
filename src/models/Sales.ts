@@ -35,6 +35,9 @@ SalesModel.init(
     createdat: {
       type: DataTypes.STRING,
     },
+    updatedat: {
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize: db_project,

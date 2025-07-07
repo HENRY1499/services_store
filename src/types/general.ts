@@ -3,8 +3,8 @@ export interface ICategory {
   name: string;
   image: string;
   status: number;
-  createdat: Date;
-  updatedat: Date;
+  createdat: string;
+  updatedat: string;
 }
 export interface IProduct {
   id_product: number;
@@ -15,8 +15,8 @@ export interface IProduct {
   stock: number;
   id_category: number;
   status: number;
-  createdat: Date;
-  updatedat: Date;
+  createdat: string;
+  updatedat: string;
 }
 
 export interface ISales {
@@ -24,6 +24,7 @@ export interface ISales {
   total: number;
   status: number;
   createdat: string;
+  updatedat?: string;
 }
 
 // interface para los datos que se reciben desde el cliente

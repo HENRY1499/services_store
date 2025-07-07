@@ -18,7 +18,7 @@ const getSales = async () => {
   const today = moment().startOf("day");
   const tomorrow = moment(today).add(1, "day");
   return await SalesModel.findAll({
-    attributes: [["id_sale", "sid"], "total", "createdat"],
+    attributes: ["id_sale", "total", "createdat"],
     where: {
       createdat: {
         [Op.between]: [today.toDate(), tomorrow.toDate()],
