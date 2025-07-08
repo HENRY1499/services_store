@@ -44,6 +44,8 @@ const verifyStock = async (body: IProduct[]) => {
 };
 
 const getDestails = async () => {
+  const today = moment().startOf("day");
+  const tomorrow = moment(today).add(1, "day");
   const salesDetails = await DetailSaleModel.findAll({
     attributes: [
       ["id_detail", "deid"],
@@ -62,6 +64,9 @@ const getDestails = async () => {
           model: CategoryModel,
         },
       ],
+    },
+    where: {
+      createdat: { [Op.between]: [today.toDate(), tomorrow.toDate()] },
     },
     order: [["createdat", "DESC"]],
   });
@@ -85,6 +90,7 @@ const createSales = async (
         total: parseFloat(total.toFixed(2)),
         status: 1,
         createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
+        updatedat: moment().format("YYYY-MM-DD HH:mm:ss"),
       },
       { transaction: t }
     );
@@ -95,6 +101,17 @@ const createSales = async (
       const subtotal = parseFloat(
         (item.sales_price * item.quantity).toFixed(2)
       );
+
+      if (item.pay_method === "" || item.pay_method === null) {
+        throw new Error(`Método de pago no seleccionado`);
+      }
+      if (item.quantity <= 0 || item.quantity === null) {
+        throw new Error("Cantidad Vacía");
+      }
+      if (item.sales_price <= 0 || item.sales_price === null) {
+        throw new Error("No colocaste el precio");
+      }
+
       // agregamos el detalle a la tabla details_sales
       const created = await DetailSaleModel.create(
         {
@@ -108,6 +125,7 @@ const createSales = async (
         },
         { transaction: t }
       );
+
       const detail = created.get({ plain: true });
 
       detailSales.push({
