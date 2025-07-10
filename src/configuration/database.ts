@@ -32,8 +32,8 @@ export const conecction_DB = async () => {
     console.log(
       "DATABASE SUCCESSFULL: conectado a la base de datos de project_flutter"
     );
-    await db_project.sync({ alter: true });
-    console.log("DATABASE SYNC: Tablas sincronizadas");
+    // await db_project.sync({ alter: true });
+    // console.log("DATABASE SYNC: Tablas sincronizadas");
   } catch (error: any) {
     console.log(error);
   }
