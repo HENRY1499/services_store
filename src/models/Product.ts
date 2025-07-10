@@ -18,7 +18,7 @@ export class ProductModel extends Model<
   declare purchase_price: number;
   declare stock: number;
   declare id_category: number;
-  declare status: number;
+  declare status: string;
   declare createdat: string; // si no usas timestamps puedes omitir estos
   declare updatedat?: string;
 }
@@ -50,8 +50,8 @@ ProductModel.init(
       defaultValue: 0,
     },
     status: {
-      type: DataTypes.INTEGER,
-      defaultValue: 1,
+      type: DataTypes.STRING,
+      defaultValue: "Activo",
     },
     id_category: {
       type: DataTypes.INTEGER,

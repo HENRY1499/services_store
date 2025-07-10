@@ -14,7 +14,7 @@ export interface IProduct {
   purchase_price: number;
   stock: number;
   id_category: number;
-  status: number;
+  status: string;
   createdat: string;
   updatedat: string;
 }
