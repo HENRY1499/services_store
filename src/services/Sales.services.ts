@@ -60,7 +60,7 @@ const getDestails = async () => {
       model: ProductModel,
       include: [
         {
-          attributes: ["name"],
+          attributes: ["name", "rol"],
           model: CategoryModel,
         },
       ],
