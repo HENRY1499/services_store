@@ -4,7 +4,7 @@ import { ICategory } from "../types/general";
 
 const getCategory = async () => {
   return await CategoryModel.findAll({
-    attributes: [["id_categories", "cid"], "image", "name", "rol", "createdat"],
+    attributes: [["id_categories", "cid"], "name", "rol", "createdat"],
   });
 };
 
