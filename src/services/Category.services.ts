@@ -9,6 +9,7 @@ const getCategory = async () => {
 };
 
 const postCategory = async (body: ICategory) => {
+  console.log(body);
   const exist_category = await CategoryModel.findOne({
     where: { name: body.name },
   });
@@ -19,6 +20,7 @@ const postCategory = async (body: ICategory) => {
   if (body.rol === undefined) {
     throw new Error("Selecciona el rol");
   }
+
   const category = await CategoryModel.create({
     name: body.name,
     rol: body.rol,

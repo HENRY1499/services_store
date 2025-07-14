@@ -17,6 +17,7 @@ const createCategory = async (req: Request, res: Response) => {
     const category = await CategoryServices.postCategory(req.body);
     return res.status(201).json(category);
   } catch (error: any) {
+    console.log("error:", error);
     return res.status(500).json({ message: error.message });
   }
 };
