@@ -1,7 +1,7 @@
 export interface ICategory {
   id_categories: number;
   name: string;
-  image: string;
+  rol: number;
   status: number;
   createdat: string;
   updatedat: string;
