@@ -4,7 +4,7 @@ import { ICategory } from "../types/general";
 
 const getCategory = async () => {
   return await CategoryModel.findAll({
-    attributes: [["id_categories", "cid"], "name", "rol", "createdat"],
+    attributes: [["id_categories", "cid"], "name", "createdat"],
   });
 };
 
@@ -17,13 +17,9 @@ const postCategory = async (body: ICategory) => {
   if (exist_category) {
     throw new Error("La categoria ya existe!!!");
   }
-  if (body.rol === undefined) {
-    throw new Error("Selecciona el rol");
-  }
 
   const category = await CategoryModel.create({
     name: body.name,
-    rol: body.rol,
     status: body.status,
     createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
     updatedat: moment().format("YYYY-MM-DD HH:mm:ss"),

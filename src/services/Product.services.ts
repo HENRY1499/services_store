@@ -24,6 +24,7 @@ const postProduct = async (body: IProduct) => {
     sales_price: body.sales_price,
     purchase_price: body.purchase_price,
     stock: body.stock,
+    users: body.stock,
     status: body.status,
     createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
   });

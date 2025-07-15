@@ -1,7 +1,6 @@
 export interface ICategory {
   id_categories: number;
   name: string;
-  rol: number;
   status: number;
   createdat: string;
   updatedat: string;
@@ -13,6 +12,7 @@ export interface IProduct {
   sales_price: number;
   purchase_price: number;
   stock: number;
+  users: number;
   id_category: number;
   status: string;
   createdat: string;

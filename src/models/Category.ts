@@ -13,7 +13,6 @@ export class CategoryModel extends Model<
 > {
   declare id_categories: CreationOptional<number>;
   declare name: string;
-  declare rol: number;
   declare status: number;
   declare createdat: string; // si no usas timestamps puedes omitir estos
   declare updatedat?: string;
@@ -28,9 +27,6 @@ CategoryModel.init(
     },
     name: {
       type: DataTypes.STRING,
-    },
-    rol: {
-      type: DataTypes.INTEGER,
     },
     status: {
       type: DataTypes.INTEGER,

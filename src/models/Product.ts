@@ -17,6 +17,7 @@ export class ProductModel extends Model<
   declare sales_price: number;
   declare purchase_price: number;
   declare stock: number;
+  declare users: number;
   declare id_category: number;
   declare status: string;
   declare createdat: string; // si no usas timestamps puedes omitir estos
@@ -48,6 +49,10 @@ ProductModel.init(
     stock: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
+    },
+    users: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1,
     },
     status: {
       type: DataTypes.STRING,

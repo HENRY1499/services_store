@@ -56,11 +56,11 @@ const getDestails = async () => {
       "createdat",
     ],
     include: {
-      attributes: ["name", "stock"],
+      attributes: ["name", "stock", "users"],
       model: ProductModel,
       include: [
         {
-          attributes: ["name", "rol"],
+          attributes: ["name"],
           model: CategoryModel,
         },
       ],
