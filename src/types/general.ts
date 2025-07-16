@@ -15,7 +15,7 @@ export interface IProduct {
   users: number;
   id_category: number;
   status: string;
-  createdat: string;
+  createdat: Date;
   updatedat: string;
 }
 

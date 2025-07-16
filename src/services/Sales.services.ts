@@ -92,7 +92,7 @@ const createSales = async (
         total: parseFloat(total.toFixed(2)),
         status: 1,
         createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
-        updatedat: moment.utc().local().format("YYYY-MM-DD HH:mm:ss"),
+        updatedat: moment().format("YYYY-MM-DD HH:mm:ss"),
       },
       { transaction: t }
     );
@@ -123,7 +123,7 @@ const createSales = async (
           quantity: item.quantity,
           pay_method: item.pay_method,
           subtotal,
-          createdat: moment(),
+          createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
         },
         { transaction: t }
       );
