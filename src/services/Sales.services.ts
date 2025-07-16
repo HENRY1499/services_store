@@ -69,7 +69,10 @@ const getDestails = async () => {
       ],
     },
     where: {
-      createdat: { [Op.between]: [today, tomorrow] },
+      createdat: {
+        [Op.gte]: today, // >= 2025-07-15 00:00:00
+        [Op.lt]: tomorrow,
+      },
     },
     order: [["createdat", "DESC"]],
   });
