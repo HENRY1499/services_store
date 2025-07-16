@@ -18,7 +18,7 @@ export class DetailSaleModel extends Model<
   declare id_product: number;
   declare sales_price: number;
   declare pay_method: string;
-  declare createdat: string; // si no usas timestamps puedes omitir estos
+  declare createdat: any; // si no usas timestamps puedes omitir estos
   declare updatedat?: string;
 }
 

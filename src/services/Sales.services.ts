@@ -123,7 +123,7 @@ const createSales = async (
           quantity: item.quantity,
           pay_method: item.pay_method,
           subtotal,
-          createdat: moment.utc().local().format("YYYY-MM-DD HH:mm:ss"),
+          createdat: moment(),
         },
         { transaction: t }
       );
