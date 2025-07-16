@@ -2,8 +2,8 @@ export interface ICategory {
   id_categories: number;
   name: string;
   status: number;
-  createdat: string;
-  updatedat: string;
+  createdat: Date;
+  updatedat: Date;
 }
 export interface IProduct {
   id_product: number;
@@ -16,15 +16,15 @@ export interface IProduct {
   id_category: number;
   status: string;
   createdat: Date;
-  updatedat: string;
+  updatedat: Date;
 }
 
 export interface ISales {
   id_sale: number;
   total: number;
   status: number;
-  createdat: string;
-  updatedat?: string;
+  createdat: Date;
+  updatedat?: Date;
 }
 
 // interface para los datos que se reciben desde el cliente
@@ -33,7 +33,7 @@ export interface ISaleDetailInput {
   sales_price: number;
   quantity: number;
   pay_method: string;
-  createdat: string;
+  createdat: Date;
 }
 
 export interface IDetailSales {
@@ -44,7 +44,7 @@ export interface IDetailSales {
   id_sale: number;
   subtotal: number;
   pay_method: string;
-  createdat: string;
+  createdat: Date;
 }
 
 export interface ISaleCreationResult {
