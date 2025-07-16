@@ -18,8 +18,8 @@ export class DetailSaleModel extends Model<
   declare id_product: number;
   declare sales_price: number;
   declare pay_method: string;
-  declare createdat: any; // si no usas timestamps puedes omitir estos
-  declare updatedat?: string;
+  declare createdat: Date; // si no usas timestamps puedes omitir estos
+  declare updatedat?: Date;
 }
 
 DetailSaleModel.init(
@@ -49,10 +49,10 @@ DetailSaleModel.init(
       type: DataTypes.STRING,
     },
     id_sale: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DATE,
     },
     createdat: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATE,
     },
   },
   {

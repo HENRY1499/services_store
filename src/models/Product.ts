@@ -20,8 +20,8 @@ export class ProductModel extends Model<
   declare users: number;
   declare id_category: number;
   declare status: string;
-  declare createdat: string; // si no usas timestamps puedes omitir estos
-  declare updatedat?: string;
+  declare createdat: Date; // si no usas timestamps puedes omitir estos
+  declare updatedat?: Date;
 }
 ProductModel.init(
   {
@@ -62,7 +62,7 @@ ProductModel.init(
       type: DataTypes.INTEGER,
     },
     createdat: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATE,
     },
   },
   {

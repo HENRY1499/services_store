@@ -14,8 +14,8 @@ export class CategoryModel extends Model<
   declare id_categories: CreationOptional<number>;
   declare name: string;
   declare status: number;
-  declare createdat: string; // si no usas timestamps puedes omitir estos
-  declare updatedat?: string;
+  declare createdat: Date; // si no usas timestamps puedes omitir estos
+  declare updatedat?: Date;
 }
 
 CategoryModel.init(

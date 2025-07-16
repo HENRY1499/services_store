@@ -14,8 +14,8 @@ export class SalesModel extends Model<
   declare id_sale: CreationOptional<number>;
   declare total: number;
   declare status: number;
-  declare createdat: string;
-  declare updatedat?: string;
+  declare createdat: Date;
+  declare updatedat?: Date;
 }
 
 SalesModel.init(
@@ -33,10 +33,10 @@ SalesModel.init(
       type: DataTypes.INTEGER,
     },
     createdat: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATE,
     },
     updatedat: {
-      type: DataTypes.STRING,
+      type: DataTypes.DATE,
     },
   },
   {
