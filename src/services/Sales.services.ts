@@ -15,7 +15,7 @@ import { db_project } from "../configuration/database";
 import { Op, Transaction } from "sequelize";
 
 const getSales = async () => {
-  const today = moment().startOf("day");
+  const today = moment.utc().startOf("day");
   const tomorrow = moment(today).add(1, "day");
   return await SalesModel.findAll({
     attributes: ["id_sale", "total", "createdat"],
@@ -44,11 +44,8 @@ const verifyStock = async (body: IProduct[]) => {
 };
 
 const getDestails = async () => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0); // 00:00:00.000
-
-  const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() + 1); // mismo 00:00 de mañana
+  const today = moment.utc().startOf("day");
+  const tomorrow = moment(today).add(1, "day");
   const salesDetails = await DetailSaleModel.findAll({
     attributes: [
       ["id_detail", "deid"],
@@ -70,8 +67,7 @@ const getDestails = async () => {
     },
     where: {
       createdat: {
-        [Op.gte]: today, // >= 2025-07-15 00:00:00
-        [Op.lt]: tomorrow,
+        [Op.between]: [today.toDate(), tomorrow.toDate()],
       },
     },
     order: [["createdat", "DESC"]],
@@ -96,7 +92,7 @@ const createSales = async (
         total: parseFloat(total.toFixed(2)),
         status: 1,
         createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
-        updatedat: moment().format("YYYY-MM-DD HH:mm:ss"),
+        updatedat: moment.utc().local().format("YYYY-MM-DD HH:mm:ss"),
       },
       { transaction: t }
     );
@@ -127,7 +123,7 @@ const createSales = async (
           quantity: item.quantity,
           pay_method: item.pay_method,
           subtotal,
-          createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
+          createdat: moment.utc().local().format("YYYY-MM-DD HH:mm:ss"),
         },
         { transaction: t }
       );
