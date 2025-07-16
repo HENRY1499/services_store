@@ -44,8 +44,11 @@ const verifyStock = async (body: IProduct[]) => {
 };
 
 const getDestails = async () => {
-  const today = moment().startOf("day");
-  const tomorrow = moment(today).add(1, "day");
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // 00:00:00.000
+
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1); // mismo 00:00 de mañana
   const salesDetails = await DetailSaleModel.findAll({
     attributes: [
       ["id_detail", "deid"],
@@ -66,7 +69,7 @@ const getDestails = async () => {
       ],
     },
     where: {
-      createdat: { [Op.between]: [today.toDate(), tomorrow.toDate()] },
+      createdat: { [Op.between]: [today, tomorrow] },
     },
     order: [["createdat", "DESC"]],
   });
