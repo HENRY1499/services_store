@@ -49,7 +49,7 @@ DetailSaleModel.init(
       type: DataTypes.STRING,
     },
     id_sale: {
-      type: DataTypes.DATE,
+      type: DataTypes.INTEGER,
     },
     createdat: {
       type: DataTypes.DATE,
