@@ -13,12 +13,12 @@ export const db_project = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   dialect: "postgres",
   timezone: "-05:00",
   logging: false,
-  // dialectOptions: {
-  //   ssl: {
-  //     require: true,
-  //     rejectUnauthorized: false,
-  //   },
-  // },
+  dialectOptions: {
+     ssl: {
+       require: true,
+       rejectUnauthorized: false,
+     },
+   },
   pool: {
     max: 100,
     min: 0,
