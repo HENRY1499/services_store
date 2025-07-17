@@ -26,7 +26,7 @@ const postProduct = async (body: IProduct) => {
     stock: body.stock,
     users: body.stock,
     status: body.status,
-    createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
+    createdat: moment().toDate(),
   });
 
   if (!newData)
@@ -49,7 +49,7 @@ const updatedProduct = async (body: IProduct) => {
       purchase_price: body.purchase_price,
       stock: body.stock,
       status: body.status,
-      updatedat: moment().format("YYYY-MM-DD HH:mm:ss"),
+      updatedat: moment().toDate(),
     },
     { where: { id_product: body.id_product } }
   );

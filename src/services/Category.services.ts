@@ -21,8 +21,8 @@ const postCategory = async (body: ICategory) => {
   const category = await CategoryModel.create({
     name: body.name,
     status: body.status,
-    createdat: moment().format("YYYY-MM-DD HH:mm:ss"),
-    updatedat: moment().format("YYYY-MM-DD HH:mm:ss"),
+    createdat: moment().toDate(),
+    updatedat: moment().toDate(),
   });
 
   if (!category) throw new Error("Hubo un error al registrar la categoria!!!");
