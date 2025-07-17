@@ -96,8 +96,8 @@ const createSales = async (
       {
         total: parseFloat(total.toFixed(2)),
         status: 1,
-        createdat: moment().toDate(),
-        updatedat: moment().toDate(),
+        createdat: moment().toDate(), //UTC-5
+        updatedat: moment().toDate(), //UTC-5
       },
       { transaction: t }
     );
