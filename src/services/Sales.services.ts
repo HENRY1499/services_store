@@ -15,12 +15,7 @@ import { db_project } from "../configuration/database";
 import { Op, Transaction } from "sequelize";
 
 const getSales = async () => {
-  const offsetHours = 5; //UTC-5
-  const today = moment
-    .utc()
-    .subtract(offsetHours, "hours")
-    .startOf("day")
-    .add(offsetHours, "hours");
+  const today = moment().startOf("day");
   const tomorrow = moment(today).add(1, "day");
   return await SalesModel.findAll({
     attributes: ["id_sale", "total", "createdat"],
