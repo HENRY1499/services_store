@@ -44,7 +44,7 @@ const verifyStock = async (body: IProduct[]) => {
 };
 
 const getDestails = async () => {
-  const today = moment.utc().startOf("day");
+  const today = moment().startOf("day");
   const tomorrow = moment(today).add(1, "day");
   const salesDetails = await DetailSaleModel.findAll({
     attributes: [
